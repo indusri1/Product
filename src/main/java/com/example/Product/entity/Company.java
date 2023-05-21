@@ -18,6 +18,10 @@ public class Company {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
-
     private List<Employee> employees = new ArrayList<>();
+    public Company(String name) {
+        this.name = name;
+    }
+
 }
+
