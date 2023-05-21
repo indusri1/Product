@@ -7,13 +7,12 @@ import com.example.Product.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 @Controller
 public class EmployeeController {
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -30,7 +29,7 @@ public class EmployeeController {
 
     // Mapping for the form submission
     @PostMapping("/employees")
-    public String addEmployee(@ModelAttribute Employee employee, @RequestParam("companyName") String companyName) {
+    public String addEmployee(@ModelAttribute Employee employee, @RequestParam("companyName") String companyName, Model model) {
 
         // Find or create the company based on the provided company name
         Company foundCompany = companyRepository.findByName(companyName)
@@ -39,12 +38,13 @@ public class EmployeeController {
         // Set the company for the employee
         employee.setCompany(foundCompany);
 
-
-
         // Save the employee to the database
         employeeRepository.save(employee);
 
-        // Redirect to a success page or return a response indicating success
+        // Add success message to the model
+        model.addAttribute("successMessage", "Employee added successfully!");
+
+        // Redirect to the success page
         return "redirect:/success";
     }
 
@@ -54,5 +54,11 @@ public class EmployeeController {
         ModelAndView mav = new ModelAndView("list-employees");
         mav.addObject("employees", employeeRepository.findAll());
         return mav;
+    }
+
+    // Mapping for the success page
+    @GetMapping("/success")
+    public String successPage() {
+        return "success";
     }
 }
