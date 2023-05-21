@@ -22,6 +22,7 @@ public class Company {
     public Company(String name) {
         this.name = name;
     }
-
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Event> events = new ArrayList<>();
 }
 

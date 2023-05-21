@@ -2,8 +2,10 @@ package com.example.Product.controller;
 
 import com.example.Product.dao.CompanyRepository;
 import com.example.Product.dao.EmployeeRepository;
+import com.example.Product.dao.EventRepository;
 import com.example.Product.entity.Company;
 import com.example.Product.entity.Employee;
+import com.example.Product.entity.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ public class EmployeeController {
 
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private EventRepository eventRepository;
 
     // Mapping to display the form for adding employees
     @GetMapping("/employees/new")
@@ -67,5 +71,39 @@ public class EmployeeController {
 
         // Redirect to the list of employees
         return "redirect:/employees";
+    }
+
+    // Mapping to display the form for adding events
+    @GetMapping("/events/new")
+    public String showEventForm(Model model) {
+        model.addAttribute("event", new Event());
+        model.addAttribute("companies", companyRepository.findAll());
+        return "event-form";
+    }
+
+    // Mapping for the event form submission
+    @PostMapping("/events")
+    public String addEvent(@ModelAttribute Event event, @RequestParam("companyName") String companyName) {
+
+        // Find or create the company based on the provided company name
+        Company foundCompany = companyRepository.findByName(companyName)
+                .orElseGet(() -> companyRepository.save(new Company(companyName)));
+
+        // Set the company for the event
+        event.setCompany(foundCompany);
+
+        // Save the event to the database
+        eventRepository.save(event);
+
+        // Redirect to a success page or return a response indicating success
+        return "redirect:/success";
+    }
+
+    // Mapping to display the list of events
+    @GetMapping("/events")
+    public ModelAndView getAllEvents() {
+        ModelAndView mav = new ModelAndView("list-events");
+        mav.addObject("events", eventRepository.findAll());
+        return mav;
     }
 }
