@@ -55,10 +55,17 @@ public class EmployeeController {
         mav.addObject("employees", employeeRepository.findAll());
         return mav;
     }
-
     // Mapping for the success page
     @GetMapping("/success")
     public String successPage() {
         return "success";
+    }
+    @PostMapping("/employees/delete")
+    public String deleteEmployee(@RequestParam("id") Long id) {
+        // Delete the employee from the database
+        employeeRepository.deleteById(id);
+
+        // Redirect to the list of employees
+        return "redirect:/employees";
     }
 }

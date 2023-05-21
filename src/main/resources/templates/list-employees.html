@@ -30,6 +30,12 @@
             <td th:text="${employee.name}" />
             <td th:text="${employee.email}" />
             <td th:text="${employee.department}" />
+            <td>
+                <form action="/employees/delete" method="post" onsubmit="return confirm('Are you sure you want to delete this employee?')">
+                    <input type="hidden" name="id" th:value="${employee.id}" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
 
