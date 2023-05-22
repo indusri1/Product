@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class EmployeeController {
 
@@ -28,7 +30,7 @@ public class EmployeeController {
     public String showEmployeeForm(Model model) {
         model.addAttribute("employee", new Employee());
         model.addAttribute("companies", companyRepository.findAll());
-        return "employee-form";
+        return "list-employees";
     }
 
     // Mapping for the form submission
@@ -76,9 +78,11 @@ public class EmployeeController {
     // Mapping to display the form for adding events
     @GetMapping("/events/new")
     public String showEventForm(Model model) {
-        model.addAttribute("event", new Event());
-        model.addAttribute("companies", companyRepository.findAll());
-        return "event-form";
+        Event event = new Event();
+        List<Company> companies = companyRepository.findAll();
+        model.addAttribute("event", event);
+        model.addAttribute("companies", companies);
+        return "list-events";
     }
 
     // Mapping for the event form submission
