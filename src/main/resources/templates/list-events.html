@@ -16,7 +16,7 @@
 
   <hr/>
 
-  <form action="/events" method="post">
+  <form action="/events" method="post" th:object="${event}">
 
     <div class="form-group">
       <label for="name">Event Name:</label>
@@ -30,10 +30,11 @@
 
     <div class="form-group">
       <label for="company">Company:</label>
-      <select id="company" name="company.id" class="form-control" required>
+      <select id="company" name="companyName" class="form-control" required>
         <option value="">Select a company</option>
-        <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}"></option>
+        <option th:each="company : ${companies}" th:value="${company.name}" th:text="${company.name}"></option>
       </select>
+
     </div>
 
     <input type="submit" value="Submit" class="btn btn-primary">

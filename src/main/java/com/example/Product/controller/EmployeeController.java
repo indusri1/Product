@@ -87,7 +87,7 @@ public class EmployeeController {
 
     // Mapping for the event form submission
     @PostMapping("/events")
-    public String addEvent(@ModelAttribute Event event, @RequestParam("companyName") String companyName) {
+    public String addEvent(@ModelAttribute Event event, @RequestParam("companyName") String companyName, Model model) {
 
         // Find or create the company based on the provided company name
         Company foundCompany = companyRepository.findByName(companyName)
