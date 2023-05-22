@@ -16,6 +16,33 @@
 
   <hr/>
 
+  <div class="container">
+
+    <h3>Events</h3>
+
+    <hr/>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Company</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="event : ${events}">
+        <td th:text="${event.id}"></td>
+        <td th:text="${event.name}"></td>
+        <td th:text="${event.description}"></td>
+        <td th:text="${event.company.name}"></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
   <form action="/events" method="post" th:object="${event}">
 
     <div class="form-group">

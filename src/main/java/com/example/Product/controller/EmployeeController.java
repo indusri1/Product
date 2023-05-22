@@ -103,11 +103,10 @@ public class EmployeeController {
         return "redirect:/success";
     }
 
-    // Mapping to display the list of events
     @GetMapping("/events")
-    public ModelAndView getAllEvents() {
-        ModelAndView mav = new ModelAndView("list-events");
-        mav.addObject("events", eventRepository.findAll());
-        return mav;
+    public String getAllEvents(Model model) {
+        List<Event> events = eventRepository.findAll();
+        model.addAttribute("events", events);
+        return "list-events";
     }
 }
