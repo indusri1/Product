@@ -12,15 +12,16 @@
 
 <div class="container">
 
-  <h3>Add Event</h3>
-
+  <div class="welcome-message">
+    <h3>Welcome to the Events Page!</h3>
+    <p>Explore and manage your events.</p>
+  </div>
   <hr/>
 
   <div class="container">
-
-    <h3>Events</h3>
-
     <hr/>
+
+    <h4>List of Events</h4>
 
     <table class="table">
       <thead>
@@ -43,8 +44,12 @@
 
   </div>
 
-  <form action="/events" method="post" th:object="${event}">
+  <br>
+  <br>
+  <br>
 
+  <h5>Add a new Event:</h5>
+  <form action="/events" method="post" th:object="${event}">
     <div class="form-group">
       <label for="name">Event Name:</label>
       <input type="text" id="name" name="name" class="form-control" required>

@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Employees</title>
+    <title>List of Employees</title>
+    <link th:href="@{/styles.css}" rel="stylesheet">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
@@ -12,9 +13,15 @@
 
 <div class="container">
 
-    <h3>List Employees</h3>
+    <!-- Add a welcome message -->
+    <div class="welcome-message">
+        <h3>Welcome to our Employee Management System!</h3>
+        <p>Manage your employees with ease.</p>
+    </div>
 
     <hr/>
+
+    <h4>List of Employees</h4>
 
     <table class="table table-bordered table-striped">
 
@@ -44,6 +51,11 @@
     </table>
 </div>
 
+<br>
+<br>
+<br>
+
+<h5>Add a new Employee:</h5>
 <form action="/employees" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>

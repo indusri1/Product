@@ -1,0 +1,32 @@
+@charset="UTF-8">
+.employee-table {
+  margin-bottom: 20px;
+}
+
+.employee-table th,
+.employee-table td {
+  vertical-align: middle;
+}
+
+.employee-form {
+  margin-top: 20px;
+}
+
+.employee-form label {
+  font-weight: bold;
+}
+
+.employee-form input[type="text"],
+.employee-form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.employee-form input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
